@@ -12,6 +12,9 @@ module.exports = {
 
     // the folder we store output files, webpack needs an absolute path
     path: path.resolve(__dirname, './dist'),
+
+    // URL | relative path
+    publicPath: 'dist/', // relative path
   },
   mode: 'none',
 
@@ -21,9 +24,28 @@ module.exports = {
     rules: [
       {
         // the resource matches the test expression
-        test: /\.(png|jp?eg)$/,
-        // copy file to the output folder, in this case: dist folder
-        type: 'asset/resource',
+        test: /\.(png|jpe?g)$/,
+
+        // copy file to the output folder(dist)
+        // type: 'asset/resource',
+
+        // images are bundled as base64 format and embedded into js files directly.
+        // type: 'asset/inline',
+
+        // general, default: >=8Kb -> resource, othewise inline, you can change the default config if you want.
+        type: 'asset',
+
+        // image size >= 10kB -> files, inline for others
+        parser: {
+          dataUrlCondition: {
+            maxSize: 10 * 1024, // 1Kb
+          },
+        },
+      },
+      {
+        // import content of txt file as source type
+        test: /\.txt$/,
+        type: 'asset/source',
       },
     ],
   },
