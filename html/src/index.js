@@ -12,7 +12,6 @@ import Button from './components/button/buttion';
 document.addEventListener('DOMContentLoaded', function () {
   const btn = new Button();
   btn.render('Submit');
-
   /*
   const technicianImg = document.createElement('img');
   technicianImg.alt = altText;

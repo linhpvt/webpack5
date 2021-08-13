@@ -1,0 +1,16 @@
+@import './variables.scss';
+
+.btn-base {
+  height: 20px;
+  line-height: 20px;
+  padding: 3px 5px;
+  color: $color;
+  background-color: $backgroundColor;
+  font-weight: $textBold;
+}
+.p-base {
+  padding: 4px;
+  color: $color;
+  background-color: $backgroundColor;
+  font-weight: $textBold;
+}
