@@ -8,10 +8,17 @@
 // sayHello();
 
 import Button from './components/button/buttion';
+import { generatePromise, asyncFunc } from './components/promises';
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
   const btn = new Button();
   btn.render('Submit');
+  const firstSample = await generatePromise(10, 'First sample output');
+  console.log(firstSample);
+
+  const secondSample = await asyncFunc(1000, 'Second sample output');
+  console.log(secondSample);
+
   /*
   const technicianImg = document.createElement('img');
   technicianImg.alt = altText;

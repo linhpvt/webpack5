@@ -66,6 +66,30 @@ module.exports = {
           'sass-loader', // 1
         ],
       },
+      // this rule apply for all js files exclude node_modules.
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          // tell webpack use babel-loader for all js files
+          loader: 'babel-loader',
+          // add more options for babel-loader
+          options: {
+            presets: [
+              // all syntax from ES6 or higher will be transpiled to ES5
+              // or all latest syntax defined in ECMAScript
+              '@babel/env',
+            ],
+
+            // we need other plugins to support the features of ECMASCript
+            plugins: [
+              // you can find out what plugin supports the features of ECMAScript and also use how many plugins as you might want
+              '@babel/plugin-proposal-class-properties',
+              '@babel/plugin-transform-runtime',
+            ],
+          },
+        },
+      },
     ],
   },
 };
