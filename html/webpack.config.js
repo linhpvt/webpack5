@@ -47,6 +47,17 @@ module.exports = {
         test: /\.txt$/,
         type: 'asset/source',
       },
+      {
+        test: /\.css$/,
+
+        use: [
+          // 1. take output of css-loader and inject it into places using them
+          // 2. bundle your css into a single file called bundle.js
+          'style-loader',
+          // only read the content of css files and then return the content. it does nothing esle
+          'css-loader',
+        ],
+      },
     ],
   },
 };
