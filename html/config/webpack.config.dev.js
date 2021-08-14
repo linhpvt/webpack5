@@ -108,6 +108,11 @@ module.exports = {
           },
         },
       },
+      // tell webpack how to handle handlebar template file
+      {
+        test: /\.hbs$/,
+        loader: 'handlebars-loader',
+      },
     ],
   },
 
@@ -134,8 +139,16 @@ module.exports = {
     }),
 
     // genereate or use the existing template html file and enject bundled resources
+    // new HtmlWebpackPlugin({
+    //   template: 'src/index.html',
+    // }),
+
+    // use handlebar as a template engine
     new HtmlWebpackPlugin({
-      template: 'src/index.html',
+      title: 'Custom template using Handlebars',
+      greeting: 'Wellcome to handlebars template engine',
+      divText: 'Webpack is amazing',
+      template: 'src/template.hbs',
     }),
   ],
 };
