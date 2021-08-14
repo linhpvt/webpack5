@@ -8,9 +8,13 @@
 // sayHello();
 
 import Button from './components/button/buttion';
+import Heading from './components/heading/heading';
 import { generatePromise, asyncFunc } from './components/promises';
 
 document.addEventListener('DOMContentLoaded', async function () {
+  const heading = new Heading();
+  heading.render();
+
   const btn = new Button();
   btn.render('Submit');
   const firstSample = await generatePromise(10, 'First sample output');
