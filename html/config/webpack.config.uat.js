@@ -1,4 +1,3 @@
-console.log('AAAAAAAAAAAAAAAAAAAAAAA', process.cwd());
 const path = require('path');
 // minify JS bundle files
 const TerserPlugin = require('terser-webpack-plugin');
@@ -8,6 +7,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 // clean folders for every building time
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+// html with enjected bundled resources such as css, js
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // webpack requires an object configuration
 module.exports = {
@@ -118,6 +120,8 @@ module.exports = {
       // name of file, it will change once css content changed
       filename: 'app.[contenthash].css',
     }),
+
+    // clean up every build
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: [
         // default clean all files and subfolders in dist folders
@@ -126,6 +130,11 @@ module.exports = {
         // remove all files and subfolders inside build folder
         path.resolve(process.cwd() + '/build/**/*'),
       ],
+    }),
+
+    // genereate or use the existing template html file and enject bundled resources
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
     }),
   ],
 };
