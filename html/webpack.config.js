@@ -1,5 +1,10 @@
 const path = require('path');
+// minify JS bundle files
 const TerserPlugin = require('terser-webpack-plugin');
+
+// extract and minimize css bundle file
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 // webpack requires an object configuration
 module.exports = {
   // entry file for webpack process
@@ -52,7 +57,10 @@ module.exports = {
         use: [
           // 1. take output of css-loader and inject it into places using them
           // 2. bundle your css into a single file called bundle.js
-          'style-loader',
+
+          // 'style-loader',
+          // use MiniCssExtractPlugin.loader instead of `style-loader` to mimimize css file
+          MiniCssExtractPlugin.loader,
           // only read the content of css files and then return the content. it does nothing esle
           'css-loader',
         ],
@@ -61,7 +69,9 @@ module.exports = {
         test: /\.scss$/,
         use: [
           // the order of loader execution is: right to left
-          'style-loader', // 3
+          // 'style-loader', // 3
+          // use MiniCssExtractPlugin.loader instead of `style-loader` to mimimize css file
+          MiniCssExtractPlugin.loader,
           'css-loader', // 2
           'sass-loader', // 1
         ],
@@ -94,5 +104,14 @@ module.exports = {
   },
 
   // plugins, you can add how many plugins as you want
-  plugins: [new TerserPlugin()],
+  plugins: [
+    // minimize bundle js files
+    new TerserPlugin(),
+
+    // minimize a separate css bundle file
+    new MiniCssExtractPlugin({
+      // name of file
+      filename: 'app.css',
+    }),
+  ],
 };
