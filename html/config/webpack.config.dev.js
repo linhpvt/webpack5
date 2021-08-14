@@ -1,9 +1,9 @@
 const path = require('path');
 // minify JS bundle files
-const TerserPlugin = require('terser-webpack-plugin');
+// const TerserPlugin = require('terser-webpack-plugin');
 
 // extract and minimize css bundle file
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 // clean folders for every building time
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -20,7 +20,7 @@ module.exports = {
   output: {
     // the name of file
     // the name of file will change once js content changed
-    filename: 'bundle.[contenthash].js',
+    filename: 'bundle.js',
 
     // the folder we store output files, webpack needs an absolute path
     path: path.resolve(__dirname, './dist'),
@@ -29,7 +29,7 @@ module.exports = {
     // publicPath: 'dist/', // relative path
     publicPath: '',
   },
-  mode: 'none',
+  mode: 'development',
 
   // add module to tell webpack how to import asset
   module: {
@@ -66,9 +66,9 @@ module.exports = {
           // 1. take output of css-loader and inject it into places using them
           // 2. bundle your css into a single file called bundle.js
 
-          // 'style-loader',
+          'style-loader',
           // use MiniCssExtractPlugin.loader instead of `style-loader` to mimimize css file
-          MiniCssExtractPlugin.loader,
+          // MiniCssExtractPlugin.loader,
           // only read the content of css files and then return the content. it does nothing esle
           'css-loader',
         ],
@@ -77,9 +77,9 @@ module.exports = {
         test: /\.scss$/,
         use: [
           // the order of loader execution is: right to left
-          // 'style-loader', // 3
+          'style-loader', // 3
           // use MiniCssExtractPlugin.loader instead of `style-loader` to mimimize css file
-          MiniCssExtractPlugin.loader,
+          // MiniCssExtractPlugin.loader,
           'css-loader', // 2
           'sass-loader', // 1
         ],
@@ -119,13 +119,13 @@ module.exports = {
   // plugins, you can add how many plugins as you want
   plugins: [
     // minimize bundle js files
-    new TerserPlugin(),
+    // new TerserPlugin(),
 
     // minimize a separate css bundle file
-    new MiniCssExtractPlugin({
-      // name of file, it will change once css content changed
-      filename: 'app.[contenthash].css',
-    }),
+    // new MiniCssExtractPlugin({
+    //   // name of file, it will change once css content changed
+    //   filename: 'app.[contenthash].css',
+    // }),
 
     // clean up every build
     new CleanWebpackPlugin({

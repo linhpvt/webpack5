@@ -1,6 +1,6 @@
 const path = require('path');
 // minify JS bundle files
-const TerserPlugin = require('terser-webpack-plugin');
+// const TerserPlugin = require('terser-webpack-plugin');
 
 // extract and minimize css bundle file
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -26,9 +26,10 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
 
     // URL | relative path
-    publicPath: 'dist/', // relative path
+    // publicPath: 'dist/', // relative path
+    publicPath: '',
   },
-  mode: 'none',
+  mode: 'production',
 
   // add module to tell webpack how to import asset
   module: {
@@ -113,7 +114,8 @@ module.exports = {
   // plugins, you can add how many plugins as you want
   plugins: [
     // minimize bundle js files
-    new TerserPlugin(),
+    // this plugin is added automatically in production mode
+    // new TerserPlugin(),
 
     // minimize a separate css bundle file
     new MiniCssExtractPlugin({
