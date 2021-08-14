@@ -1,5 +1,5 @@
 const path = require('path');
-
+const TerserPlugin = require('terser-webpack-plugin');
 // webpack requires an object configuration
 module.exports = {
   // entry file for webpack process
@@ -92,4 +92,7 @@ module.exports = {
       },
     ],
   },
+
+  // plugins, you can add how many plugins as you want
+  plugins: [new TerserPlugin()],
 };
