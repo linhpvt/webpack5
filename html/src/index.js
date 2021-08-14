@@ -23,8 +23,6 @@ document.addEventListener('DOMContentLoaded', async function () {
   const secondSample = await asyncFunc(1000, 'Second sample output');
   console.log(secondSample);
 
-  btn.saveHell();
-
   /*
   const technicianImg = document.createElement('img');
   technicianImg.alt = altText;

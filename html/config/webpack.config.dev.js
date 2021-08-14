@@ -3,7 +3,7 @@ const path = require('path');
 // const TerserPlugin = require('terser-webpack-plugin');
 
 // extract and minimize css bundle file
-// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 // clean folders for every building time
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -14,16 +14,24 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 // webpack requires an object configuration
 module.exports = {
   // entry file for webpack process
-  entry: './src/index.js',
+  // entry: './src/index.js',
+
+  // multiple entries
+  entry: {
+    'hello-world': './src/hello-world.js',
+    wiki: './src/wiki.js',
+  },
 
   // where is store the output
   output: {
     // the name of file
     // the name of file will change once js content changed
-    filename: 'bundle.js',
+    // filename: 'bundle.js',
+
+    filename: '[name].[contenthash].js',
 
     // the folder we store output files, webpack needs an absolute path
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(process.cwd(), './dist'),
 
     // URL | relative path
     // publicPath: 'dist/', // relative path
@@ -66,9 +74,9 @@ module.exports = {
           // 1. take output of css-loader and inject it into places using them
           // 2. bundle your css into a single file called bundle.js
 
-          'style-loader',
+          // 'style-loader',
           // use MiniCssExtractPlugin.loader instead of `style-loader` to mimimize css file
-          // MiniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
           // only read the content of css files and then return the content. it does nothing esle
           'css-loader',
         ],
@@ -77,9 +85,9 @@ module.exports = {
         test: /\.scss$/,
         use: [
           // the order of loader execution is: right to left
-          'style-loader', // 3
+          // 'style-loader', // 3
           // use MiniCssExtractPlugin.loader instead of `style-loader` to mimimize css file
-          // MiniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
           'css-loader', // 2
           'sass-loader', // 1
         ],
@@ -122,10 +130,10 @@ module.exports = {
     // new TerserPlugin(),
 
     // minimize a separate css bundle file
-    // new MiniCssExtractPlugin({
-    //   // name of file, it will change once css content changed
-    //   filename: 'app.[contenthash].css',
-    // }),
+    new MiniCssExtractPlugin({
+      // name of file, it will change once css content changed
+      filename: '[name].[contenthash].css',
+    }),
 
     // clean up every build
     new CleanWebpackPlugin({
@@ -134,7 +142,7 @@ module.exports = {
         '**/*',
 
         // remove all files and subfolders inside build folder
-        path.resolve(process.cwd() + '/build/**/*'),
+        path.resolve(process.cwd(), './build/**/*'),
       ],
     }),
 

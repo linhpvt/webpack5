@@ -1,5 +1,3 @@
-function sayHello() {
-  console.log('Hello world');
-}
-
-export default sayHello;
+import Heading from './components/heading/heading';
+const heading = new Heading();
+heading.render();
