@@ -1,9 +1,13 @@
+console.log('AAAAAAAAAAAAAAAAAAAAAAA', process.cwd());
 const path = require('path');
 // minify JS bundle files
 const TerserPlugin = require('terser-webpack-plugin');
 
 // extract and minimize css bundle file
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+// clean folders for every building time
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 // webpack requires an object configuration
 module.exports = {
@@ -13,7 +17,8 @@ module.exports = {
   // where is store the output
   output: {
     // the name of file
-    filename: 'bundle.js',
+    // the name of file will change once js content changed
+    filename: 'bundle.[contenthash].js',
 
     // the folder we store output files, webpack needs an absolute path
     path: path.resolve(__dirname, './dist'),
@@ -110,8 +115,17 @@ module.exports = {
 
     // minimize a separate css bundle file
     new MiniCssExtractPlugin({
-      // name of file
-      filename: 'app.css',
+      // name of file, it will change once css content changed
+      filename: 'app.[contenthash].css',
+    }),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: [
+        // default clean all files and subfolders in dist folders
+        '**/*',
+
+        // remove all files and subfolders inside build folder
+        path.resolve(process.cwd() + '/build/**/*'),
+      ],
     }),
   ],
 };
