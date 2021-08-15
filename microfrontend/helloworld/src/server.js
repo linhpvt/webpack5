@@ -5,7 +5,7 @@ const express = require('express');
 const spa = new express();
 const path = require('path');
 const fs = require('fs');
-const PORT = 3000;
+const PORT = 9000;
 const ROUTES = {
   Home: '/',
 };

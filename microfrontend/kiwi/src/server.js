@@ -5,9 +5,9 @@ const express = require('express');
 const spa = new express();
 const path = require('path');
 const fs = require('fs');
-const PORT = 3000;
+const PORT = 9001;
 const ROUTES = {
-  Home: '/',
+  Home: '/hello-world',
 };
 
 console.log(path.resolve(__dirname, '../dist'));
