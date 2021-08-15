@@ -1,3 +1,4 @@
+import './navigation.scss';
 export default class Navigation {
   render(items) {
     const lis = (items || []).map((item) => {

@@ -1,6 +1,15 @@
 .navigation-bar {
   list-style: none;
+  background-color: rgb(202, 207, 202);
+  height: 35px;
+  color: wheat;
+  font-weight: bold;
   li {
-    text-decoration: none;
+    display: inline-block;
+    line-height: 35px;
+    padding-right: 10px;
+    a {
+      text-decoration: none;
+    }
   }
 }

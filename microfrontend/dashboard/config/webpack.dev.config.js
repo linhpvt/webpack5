@@ -50,8 +50,8 @@ module.exports = {
     new ModuleFederationPlugin({
       name: 'DashboardApp',
       remotes: {
-        HelloWorldPage: 'HelloWorldPage@http://localhost:9000/remoteEntry.js',
-        KiwiPage: 'KiwiPage@http://localhost:9001/remoteEntry.js',
+        HelloWorldApp: 'HelloWorldApp@http://localhost:9000/remoteEntry.js',
+        KiwiApp: 'KiwiApp@http://localhost:9001/remoteEntry.js',
       },
     }),
   ],

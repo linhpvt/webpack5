@@ -1,21 +1,23 @@
 import Navigation from './components/navigation/navigation';
-import Button from 'HelloWorldApp/HelloWorldButton';
+import HelloPage from 'HelloWorldApp/HelloPage';
 
 // load dymamically
-// import('HelloWorldApp/HelloWorldButton').then((result) => {
-//   const Button = result.default;
-//   const btn = new Button();
-//   btn.render();
+// import('HelloWorldApp/HelloPage').then((result) => {
+//   console.log(result.default);
 // });
+const navi = new Navigation();
+console.log('NVVVV', navi);
+const naviItems = [
+  {
+    url: '/hello-world',
+    title: 'Hello world',
+  },
+  {
+    url: '/wiki',
+    title: 'Wiki',
+  },
+];
+navi.render(naviItems);
 
-const img = new KiwiImage();
-img.render();
-
-const btn = new Button();
-btn.render();
-
-if (process.env.NODE_ENV === 'production') {
-  console.log('Production mode');
-} else if (process.env.NODE_ENV === 'development') {
-  console.log('Development mode');
-}
+const helloPage = new HelloPage();
+helloPage.render();
