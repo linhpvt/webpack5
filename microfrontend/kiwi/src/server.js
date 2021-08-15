@@ -7,13 +7,13 @@ const path = require('path');
 const fs = require('fs');
 const PORT = 9001;
 const ROUTES = {
-  Home: '/hello-world',
+  Home: '/',
 };
 
 console.log(path.resolve(__dirname, '../dist'));
 
 // Tell express server how to serve static resources such as images, css, js, ect.
-spa.use('/static', express.static(path.resolve(__dirname, '../dist')));
+spa.use(ROUTES.Home, express.static(path.resolve(__dirname, '../dist')));
 
 // home page
 spa.get(ROUTES.Home, async (req, res) => {

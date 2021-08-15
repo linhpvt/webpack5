@@ -1,13 +1,14 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { ModuleFederationPlugin } = require('webpack').container;
 
 module.exports = {
   entry: './src/index.js',
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(process.cwd(), './dist'),
-    publicPath: '',
+    publicPath: 'http://localhost:9001/',
   },
   mode: 'development',
   devServer: {
@@ -52,6 +53,12 @@ module.exports = {
       title: 'Wiki',
       description: 'Wiki',
       template: 'src/page-template.hbs',
+    }),
+    new ModuleFederationPlugin({
+      name: 'WikiApp',
+      remotes: {
+        HelloWorldApp: 'HelloWorldApp@http://localhost:9000/remoteEntry.js',
+      },
     }),
   ],
 };
