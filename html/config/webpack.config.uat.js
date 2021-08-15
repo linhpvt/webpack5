@@ -14,22 +14,35 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 // webpack requires an object configuration
 module.exports = {
   // entry file for webpack process
-  entry: './src/index.js',
+  // entry: './src/index.js',
+
+  // multiple entries
+  entry: {
+    'hello-world': './src/hello-world.js',
+    wiki: './src/wiki.js',
+  },
 
   // where is store the output
   output: {
     // the name of file
     // the name of file will change once js content changed
-    filename: 'bundle.[contenthash].js',
+    filename: '[name].[contenthash].js',
 
     // the folder we store output files, webpack needs an absolute path
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(process.cwd(), './dist'),
 
     // URL | relative path
     // publicPath: 'dist/', // relative path
     publicPath: '',
   },
   mode: 'production',
+
+  // extract common dependencies like lodash, ect into separate bundle files
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
 
   // add module to tell webpack how to import asset
   module: {
@@ -120,7 +133,7 @@ module.exports = {
     // minimize a separate css bundle file
     new MiniCssExtractPlugin({
       // name of file, it will change once css content changed
-      filename: 'app.[contenthash].css',
+      filename: '[name].[contenthash].css',
     }),
 
     // clean up every build
@@ -130,11 +143,11 @@ module.exports = {
         '**/*',
 
         // remove all files and subfolders inside build folder
-        path.resolve(process.cwd() + '/build/**/*'),
+        path.resolve(process.cwd(), './build/**/*'),
       ],
     }),
 
-    // genereate or use the existing template html file and enject bundled resources
+    // genereate or use the existing template html file and inject bundled resources
     new HtmlWebpackPlugin({
       template: 'src/index.html',
     }),

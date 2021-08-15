@@ -152,11 +152,34 @@ module.exports = {
     // }),
 
     // use handlebar as a template engine
+    // new HtmlWebpackPlugin({
+    //   title: 'Custom template using Handlebars',
+    //   greeting: 'Wellcome to handlebars template engine',
+    //   divText: 'Webpack is amazing',
+    //   template: 'src/template.hbs',
+    // }),
+
+    // hello-world html page
     new HtmlWebpackPlugin({
-      title: 'Custom template using Handlebars',
-      greeting: 'Wellcome to handlebars template engine',
+      filename: 'hello-world.html',
+      // which chunk will be enjected to hello-world page, in this case = entry.hello-world
+      chunks: ['hello-world'],
+      title: 'Hello World',
+      greeting: 'Hello World. Wellcome to handlebars template engine',
       divText: 'Webpack is amazing',
       template: 'src/template.hbs',
+    }),
+
+    // wiki html page
+    new HtmlWebpackPlugin({
+      filename: 'wiki.html',
+      // wiki chunks will be enjected to wiki page, in this case = entry.wiki
+      chunks: ['wiki'],
+      title: 'Wiki',
+      greeting: 'Wiki, Wellcome to handlebars template engine',
+      divText: 'Webpack is amazing',
+      template: 'src/template.hbs',
+      minify: true,
     }),
   ],
 };
