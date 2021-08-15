@@ -110,6 +110,7 @@ module.exports = {
               // all syntax from ES6 or higher will be transpiled to ES5
               // or all latest syntax defined in ECMAScript
               '@babel/env',
+              '@babel/preset-react',
             ],
 
             // we need other plugins to support the features of ECMASCript
