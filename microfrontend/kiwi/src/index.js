@@ -1,2 +1,8 @@
-// import function tell webpack something loaded asynchronously need to be done first.
-import('./bootstrap');
+/*
+  LOCAL DEVELOPMENT
+*/
+
+import KiwiPage from './pages/kiwi/kiwi-page';
+
+const kiwi = new KiwiPage();
+kiwi.render();

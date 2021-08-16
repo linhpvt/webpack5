@@ -10,18 +10,26 @@ const ROUTES = {
   Home: '/',
 };
 
-console.log(path.resolve(__dirname, '../dist'));
+// cache content
+const Cache = (() => {
+  let cache;
+  return () => {
+    if (cache) {
+      return cache;
+    }
+    const pathToHtmlFile = path.resolve(__dirname, '../dist/index.html');
+    // read content
+    cache = fs.readFileSync(pathToHtmlFile, 'utf-8');
+    return cache;
+  };
+})();
 
 // Tell express server how to serve static resources such as images, css, js, ect.
 spa.use(ROUTES.Home, express.static(path.resolve(__dirname, '../dist')));
 
 // all pages
 spa.get('*', async (req, res) => {
-  const pathToHtmlFile = path.resolve(__dirname, '../dist/index.html');
-
-  // read content
-  const contentHtmlFile = fs.readFileSync(pathToHtmlFile, 'utf-8');
-
+  const contentHtmlFile = Cache();
   res.send(contentHtmlFile);
 });
 

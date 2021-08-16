@@ -2,19 +2,19 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { ModuleFederationPlugin } = require('webpack').container;
-
+const PORT = 9001;
 module.exports = {
   entry: './src/index.js',
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(process.cwd(), './dist'),
-    publicPath: 'http://localhost:9001/',
+    publicPath: `http://localhost:${PORT}/`,
   },
   mode: 'development',
   devServer: {
     contentBase: path.resolve(process.cwd(), './dist'),
     index: 'index.html',
-    port: 9001,
+    port: PORT,
   },
   module: {
     rules: [
@@ -50,14 +50,15 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Wiki',
-      description: 'Wiki',
+      title: 'Kiwi',
+      description: 'Kiwi',
       template: 'src/page-template.hbs',
     }),
     new ModuleFederationPlugin({
-      name: 'WikiApp',
-      remotes: {
-        HelloWorldApp: 'HelloWorldApp@http://localhost:9000/remoteEntry.js',
+      name: 'KiwiApp',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './KiwiPage': './src/pages/kiwi/kiwi-page.js',
       },
     }),
   ],
